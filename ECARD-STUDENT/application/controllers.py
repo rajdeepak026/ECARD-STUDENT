@@ -131,4 +131,3 @@ def card_details(card,user_id):
             return render_template("user_dash.html", this_user=this_user)
         return render_template("voter.html", user_id=user_id)
     
-#updated
