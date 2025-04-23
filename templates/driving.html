@@ -24,11 +24,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="Input2" class="form-label">Father's Name</label>
-                        <input type="text" class="form-control" id="Input2" placeholder="Your Name" name="fullname">
+                        <input type="text" class="form-control" id="Input2" placeholder="Your Name" name="f_name">
                     </div>
                     <div class="mb-3">
                         <label for="Input3" class="form-label">Select Gender</label>
-                        <select class="form-select" aria-label="Default select example" id="Input3" name="card">
+                        <select class="form-select" aria-label="Default select example" id="Input3" name="gender">
                             <option value="aadhar">Male</option>
                             <option value="pan">Female</option>
                             <option value="driving">Others</option>
@@ -40,16 +40,22 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Address</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" name="address" id="exampleFormControlTextarea1"
+                            rows="3"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="Input3" class="form-label">Pin Code</label>
-                        <input type="number" class="form-control" id="Input3" name="dob">
+                        <input type="number" class="form-control" id="Input3" name="pin">
                     </div>
 
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="imageuplode">Choose an image to uplode:</label>
                         <input type="file" name="image" id="imageuplode" accept="image/*">
+                    </div> -->
+                    <div class="mb-3">
+                        <label for="imageuplode">Choose an image to upload:</label>
+                        <!-- Image path selection from static folder -->
+                        <input type="text" name="image" id="imageuplode" value="/static/images/download.jpg">
                     </div>
                     <div style="text-align: center;">
                         <input type="submit" class="btn btn-primary" value="Reqest a Card">

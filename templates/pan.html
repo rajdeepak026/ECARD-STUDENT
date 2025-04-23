@@ -39,9 +39,14 @@
                         <input type="date" class="form-control" id="Input3" name="dob">
                     </div>
 
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="imageuplode">Choose an image to uplode:</label>
                         <input type="file" name="image" id="imageuplode" accept="image/*">
+                    </div> -->
+                    <div class="mb-3">
+                        <label for="imageuplode">Choose an image to upload:</label>
+                        <!-- Image path selection from static folder -->
+                        <input type="text" name="image" id="imageuplode" value="/static/images/download.jpg">
                     </div>
                     <div style="text-align: center;">
                         <input type="submit" class="btn btn-primary" value="Reqest a Card">

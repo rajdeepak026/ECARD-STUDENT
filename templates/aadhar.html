@@ -17,17 +17,23 @@
         <div id="canvas">
             <div id="form-body" style="height: 575px; width: 500px; margin-top: 120px;">
                 <h1>Adhar Card</h1>
-                <form action="/request/{{card}}/{{user_id}}" method="post" enctype="multipart/form-data">
+                <form action="/request/aadhar/{{ user_id  }}" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="Input1" class="form-label">Full Name</label>
                         <input type="text" class="form-control" id="Input1" placeholder="Your Name" name="fullname">
                     </div>
                     <div class="mb-3">
+                        <label for="InputFather" class="form-label">Father's Name</label>
+                        <input type="text" class="form-control" id="InputFather" placeholder="Father's Name"
+                            name="f_name">
+                    </div>
+
+                    <div class="mb-3">
                         <label for="Input2" class="form-label">Select Gender</label>
-                        <select class="form-select" aria-label="Default select example" id="Input2" name="card">
-                            <option value="aadhar">Male</option>
-                            <option value="pan">Female</option>
-                            <option value="driving">Others</option>
+                        <select class="form-select" aria-label="Default select example" id="Input2" name="gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Others">Others</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -36,12 +42,16 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Address</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="address"
+                            rows="3"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="imageuplode">Choose an image to uplode:</label>
-                        <input type="file" name="image" id="imageuplode" accept="image/*">
+                        <label for="imageuplode">Choose an image to upload:</label>
+                        <!-- Image path selection from static folder -->
+                        <input type="text" name="image" id="imageuplode" value="/static/images/download.jpg">
                     </div>
+
+
                     <div style="text-align: center;">
                         <input type="submit" class="btn btn-primary" value="Reqest a Card">
                     </div>

@@ -24,14 +24,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="Input2" class="form-label">Father's Name</label>
-                        <input type="text" class="form-control" id="Input2" placeholder="Your Name" name="fullname">
+                        <input type="text" class="form-control" id="Input2" placeholder="Your Name" name="f_name">
                     </div>
                     <div class="mb-3">
                         <label for="Input3" class="form-label">Select Gender</label>
-                        <select class="form-select" aria-label="Default select example" id="Input3" name="card">
-                            <option value="aadhar">Male</option>
-                            <option value="Election">Female</option>
-                            <option value="driving">Others</option>
+                        <select class="form-select" aria-label="Default select example" id="Input3" name="gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Others">Others</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -39,9 +39,14 @@
                         <input type="date" class="form-control" id="Input3" name="dob">
                     </div>
 
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="imageuplode">Choose an image to uplode:</label>
                         <input type="file" name="image" id="imageuplode" accept="image/*">
+                    </div> -->
+                    <div class="mb-3">
+                        <label for="imageuplode">Choose an image to upload:</label>
+                        <!-- Image path selection from static folder -->
+                        <input type="text" name="image" id="imageuplode" value="/static/images/download.jpg">
                     </div>
                     <div style="text-align: center;">
                         <input type="submit" class="btn btn-primary" value="Reqest a Card">
