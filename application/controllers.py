@@ -1,5 +1,7 @@
 from flask import Flask, render_template, redirect, request, session
 from flask import current_app as app #it refers to the app object created
+import random 
+import string
 
 from .models import * #both resides in same folder
 
@@ -40,7 +42,6 @@ def register():
     return render_template("register.html")
 @app.route("/logout")
 def logout():
-    session.clear()  # clears all session data
     return redirect("/login")
 
 @app.route("/admin")
@@ -154,3 +155,31 @@ def card_details(card,user_id):
             return render_template("user_dash.html", this_user=this_user)
         return render_template("voter.html", user_id=user_id)
     
+@app.route("/update_status/<card>/<int:user_id>", methods=["GET", "POST"])
+def update_status(card, user_id):
+    details = Info.query.filter_by(user_id=user_id, c_name=card).all()
+    detail = Info.query.filter_by(user_id=user_id, c_name=card, atr_name="status").first()
+    if request.method == "POST":
+        status = request.form.get("status")
+        detail.atr_value = status
+        db.session.commit()
+        return redirect("/admin")
+    return render_template("update_status.html", user_id=user_id, card=card, details=details)
+
+
+@app.route("/generate/<card>/<int:user_id>", methods=["GET","POST"])
+def generate(card, user_id):
+    detail = Info.query.filter_by(user_id=user_id, c_name=card, atr_name="status").first()
+    detail.art_value = "generated"
+    db.session.commit()
+    key = ""
+    if card == "aadhar":
+        key = random.randint(10*11, 10*12 -1)
+    elif card == "pan":
+        first_part = ''.join(random.choices(string.ascii_uppercase, k=5))
+        middle_part = ''.join(random.choices(string.digits, k=4))
+        last_part = random.choice(string.ascii_uppercase)
+        key = first_part + middle_part + last_part
+    elif card == "driving":
+        part1 = ''.join(random.choices(string.ascii_uppercase, k=2))
+        part2 = ''.join(random.choices(string.digits, k=2))
