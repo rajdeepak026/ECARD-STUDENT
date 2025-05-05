@@ -94,6 +94,7 @@ def card_details(card,user_id):
         if request.method=="POST":
             fullname = request.form.get("fullname")
             f_name = request.form.get("f_name")
+            gender = request.form.get("gender")
             dob = request.form.get("dob")
             image = request.form.get("image")
 
@@ -102,7 +103,9 @@ def card_details(card,user_id):
             info3 = Info(atr_name="dob", atr_value=dob, c_name=card, user_id=user_id)
             info4 = Info(atr_name="image", atr_value=image, c_name=card, user_id=user_id)
             info5 = Info(atr_name="status", atr_value="requested", c_name=card, user_id=user_id)
-            db.session.add_all([info1, info2, info3, info4, info5])
+            info6 = Info(atr_name="gender", atr_value=gender, c_name=card, user_id=user_id)
+
+            db.session.add_all([info1, info2, info3, info4, info5, info6])
             db.session.commit()
             return render_template("user_dash.html", this_user=this_user)
 
@@ -166,11 +169,10 @@ def update_status(card, user_id):
         return redirect("/admin")
     return render_template("update_status.html", user_id=user_id, card=card, details=details)
 
-
 @app.route("/generate/<card>/<int:user_id>", methods=["GET","POST"])
 def generate(card, user_id):
     detail = Info.query.filter_by(user_id=user_id, c_name=card, atr_name="status").first()
-    detail.art_value = "generated"
+    detail.atr_value = "generated"
     db.session.commit()
     key = ""
     if card == "aadhar":
@@ -183,3 +185,26 @@ def generate(card, user_id):
     elif card == "driving":
         part1 = ''.join(random.choices(string.ascii_uppercase, k=2))
         part2 = ''.join(random.choices(string.digits, k=2))
+        part3 = ''.join(random.choices(string.digits, k=7))
+        key = part1+part2+"-2025-"+part3
+    elif card == "election":
+        first_part = ''.join(random.choices(string.ascii_uppercase, k=3))
+        last_part  = ''.join(random.choices(string.digits, k=7))
+        key = first_part + last_part
+    info1 = Info(atr_name="key", atr_value=key, c_name=card, user_id=user_id)
+    db.session.add(info1)
+    db.session.commit()
+    return redirect("/admin")
+
+@app.route("/view/<card>/<int:user_id>")
+def view(card, user_id):
+    details = Info.query.filter_by(user_id=user_id, c_name=card).all()
+    if card == "aadhar":
+        return render_template("view_adhar.html", details=details)
+    elif card == "pan":
+        return render_template("view_pan.html", details=details)
+    elif card == "driving":
+        return render_template("view_drive.html", details=details)
+    elif card == "election":
+        return render_template("view_voter.html", details=details)
+

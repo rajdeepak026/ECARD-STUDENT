@@ -17,12 +17,12 @@
         <div id="canvas">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Welcome {{this_user.username}}</a>
+                    <a class="navbar-brand" href="/user">Welcome {{this_user.username}}</a>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <a class="nav-link active" aria-current="page" href="/">Home</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link unactive" aria-current="page" href="/logout">Logout</a>
@@ -49,16 +49,20 @@
                                 <th class="text-center" scope="col">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Aadhar Card</td>
-                                <td class="d-flex justify-content-center">
-                                    <a type="button" class="btn btn-info mx-1" href="">View</a>
-                                    <a type="button" class="btn btn-danger" href="">Delete</a>
-                                </td>
-                            </tr>
-                            <tr>
+                        {% for info in this_user.detais %}
+                            {% if info.atr_value == "generated" %}
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">{{info.id}}</th>
+                                        <td>{{info.c_name}}</td>
+                                        <td class="d-flex justify-content-center">
+                                            <a type="button" class="btn btn-info mx-1" href="/view/{{info.c_name}}/{{info.user_id}}">View</a>
+                                            <a type="button" class="btn btn-danger" href="">Delete</a>
+                                        </td>
+                                    </tr>
+                            {% endif %}
+                        {% endfor %}
+                            <!-- <tr>
                                 <th scope="row">2</th>
                                 <td>Pan Card</td>
                                 <td class="d-flex justify-content-center">
@@ -73,9 +77,9 @@
                                     <a type="button" class="btn btn-info mx-1" href="">View</a>
                                     <a type="button" class="btn btn-danger" href="">Delete</a>
                                 </td>
-                            </tr>
-
+                            </tr> -->
                         </tbody>
+
                     </table>
                 </div>
                 <h3>Requested Cards</h3>
